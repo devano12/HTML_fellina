@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Fellina Shelind P</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to top, #edf3e5, #d5e6cf);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .image-container {
+      margin-top: 40px;
+      animation: fadeIn 2s ease-in;
+    }
+
+    .image-container img {
+      width: 220px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .text-box, .next-btn, .button-container {
+      display: none;
+    }
+
+    .text-box {
+      max-width: 90%;
+      margin-top: 30px;
+      text-align: center;
+      font-size: 1.4rem;
+      color: #3c5e3c;
+      background: #f5faef;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      animation: fadeIn 0.6s ease;
+      min-height: 80px;
+    }
+
+    button {
+      margin: 12px;
+      padding: 12px 28px;
+      background: #8cbf7e;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+      background: #6c9f60;
+    }
+
+    .active-mau {
+      transform: scale(1.3);
+      animation: bounce 0.6s infinite alternate;
+      box-shadow: 0 0 15px rgba(140, 191, 126, 0.6);
+    }
+
+    @keyframes bounce {
+      0% { transform: scale(1.3) translateY(0); }
+      100% { transform: scale(1.3) translateY(-10px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .leaf {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #7dbf4e;
+      border-radius: 50% 50% 0 50%;
+      transform: rotate(45deg);
+      opacity: 0.2;
+      animation: float 10s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(45deg); opacity: 0.3; }
+      100% { transform: translateY(-1000px) rotate(45deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Daun -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      let leaf = document.createElement('div');
+      leaf.className = 'leaf';
+      leaf.style.left = Math.random() * 100 + 'vw';
+      leaf.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      leaf.style.width = leaf.style.height = (Math.random() * 15 + 10) + 'px';
+      document.body.appendChild(leaf);
+    }
+  </script>
+
+  <!-- Gambar -->
+  <div class="image-container">
+    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHRsdzI4YmUyMTRsbGxjNDB4dGFjdjc2aGduNG4zNDFqeTlkbm5jdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hTh9bSbUPWMWk/giphy.gif" alt="GIF Love Cute">
+  </div>
+
+  <!-- Musik Manual -->
+  <audio id="bgMusic" src="https://file.garden/aHa8NP_jWiMmbzwJ/blue%20(slowed%20down).mp3" type="audio/mpeg"></audio>
+  <button id="playBtn" onclick="playMusic()">Buat Fellin hehe</button>
+
+  <!-- Teks -->
+  <div class="text-box" id="displayText">...</div>
+  <button class="next-btn" onclick="showNextText()">Lanjutt🍃</button>
+
+  <!-- Pilihan -->
+  <div class="button-container" id="choiceButtons">
+    <button id="mauBtn" onclick="jawabMau()">Gelem💚</button>
+    <button onclick="triggerMau()">Ragelem🙈</button>
+  </div>
+
+  <!-- Script -->
+  <script>
+    const texts = [
+      "Allo Fellin....",
+      "Kaget b unik yo wkwkwk",
+      "emmm, intine ki kan aku seneng kowe dalam hal yo asli tulus hehe",
+      "sebener e sebelum reti kowe b indro kae ki aku chat kowe pengen cedak tapi kan aku reti nek kowe yang e indro yasuda ta enteni juga si",
+      "Mungkin kowe nduwe trauma opo lah sing marakke trust issue tapi yo mungkin seiring berjalan e waktu b aku semoga bahagia b trauma ne ilang dan bukti nek misal lanang sing mbo pikir negatif iso ilang ne aku",
+      "trus aku mung jaluk ajari juga nek misal aku salah po ngopo dll ne kowe po ketokke ga enak i ati ngomong ae yoo soal e aku rodo rodo emg nek kognono tapiiii ttp ta usahakan, truss misal ki nek mungkin kowe masalah agama kui nggko akhiran wae soal e yo aku ne dewe kan ne agamaku rapatio kenceng dadi nek maslah pindah suk suk wae bukan gamau tapii nek wes pasti kowe jodo ku oke aku bakal pindah dan pindah juga faktor e du mergo kowe yangku dll ora ben aku nduwe pedoman juga dan ono sing ndampingi",
+      "aku isin nembak langsung dan ra biasa soal e aku ra dolanan wedokan yoan makane kan gabiasa dadi ne ta gawekke HTML yoo semoga wae seneng",
+      "jadiii saiki Gelem tida dadi yangku hehe yo kata kata ne kurang si tapi semoga kowe moco seneng maybe dan iso ku usahaku nembak iki yo terkesan ra gentle tapi pye neh huhu dan ki noted yo tenang kowe rabakal ta padak padakke b mantan aman saja ndoro so jadi jawaban nya apa???"
+    ];
+
+    let current = 0;
+    const textBox = document.getElementById("displayText");
+    const nextBtn = document.querySelector(".next-btn");
+    const choiceButtons = document.getElementById("choiceButtons");
+    const mauBtn = document.getElementById("mauBtn");
+    const playBtn = document.getElementById("playBtn");
+    const bgMusic = document.getElementById("bgMusic");
+
+    function playMusic() {
+      bgMusic.play();
+      playBtn.style.display = "none";
+      textBox.style.display = "block";
+      nextBtn.style.display = "inline-block";
+      textBox.innerHTML = texts[0];
+      current = 1;
+    }
+
+    function showNextText() {
+      if (current < texts.length) {
+        textBox.innerHTML = texts[current];
+        current++;
+        if (current === texts.length) {
+          nextBtn.style.display = "none";
+          choiceButtons.style.display = "block";
+        }
+      }
+    }
+
+    function jawabMau() {
+      const message = encodeURIComponent("Gelem");
+      window.open("https://wa.me/6281215625720?text=" + message, "_blank");
+    }
+
+    function triggerMau() {
+      mauBtn.classList.add("active-mau");
+    }
+  </script>
+</body>
+</html>
